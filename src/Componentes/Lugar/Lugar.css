@@ -10,3 +10,18 @@
 .lugarCard img{
     width: 100%;
 }
+
+.lugarCard p{
+    font-weight: 500;
+}
+
+.lugar{
+    margin-bottom: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.lugarTitulo{
+    margin-left: 5%;
+    margin-right: 5%;
+}

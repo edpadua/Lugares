@@ -6,13 +6,22 @@ import { useEffect, useState } from 'react';
 
 import Lugar from '../Lugar';
 
+import GoogleMapReact from 'google-map-react';
+
 function Lugares() {
 
 
     const [lugares, setLugares] = useState([]);
-    const [latitude, setLatidude] = useState(40.7127837);
+    const [latitude, setLatitude] = useState(40.7127837);
     const [longitude, setLongitude] = useState(-74.0059413);
-    
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            setLatitude(position.coords.latitude)
+            setLongitude(position.coords.longitude)
+        });
+       
+    }, []);
 
 
     useEffect(() => {
@@ -31,7 +40,7 @@ function Lugares() {
                     lang: 'en_US'
                 },
                 headers: {
-                    'X-RapidAPI-Key': 'aa57a71a86msh797eb071c0f6057p1fdb5ejsn3d7fa6579a8a',
+                    'X-RapidAPI-Key': process.env.REACT_APP_TRAVEL_KEY,
                     'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
                 }
             };
@@ -47,24 +56,54 @@ function Lugares() {
         getLugares(latitude, longitude);
 
 
-    }, []);
+    }, [latitude, longitude]);
 
 
 
 
     return (
-        <div>
-
-            {console.log("lugares definitivos", lugares)}
-
-            <p>{process.env.TRAVEL_KEY}</p>
-            {lugares.map((lugar, index) =>
 
 
-                <Lugar lugar={lugar} index={index} />
+        <div className="lugares">
 
 
-            )}
+
+            <div className="lista_lugares">
+
+
+
+                {console.log("lugares definitivos", lugares)}
+
+
+                {lugares.map((lugar, index) =>
+
+
+                    <Lugar lugar={lugar} index={index} />
+
+
+                )}
+
+            </div>
+
+            <div className="mapa_lugares" >
+
+                <GoogleMapReact
+                    bootstrapURLKeys={{
+                        key: process.env.REACT_APP_GOOGLE_MAPS_KEY,
+                        language: "en",
+                        region: "US"
+                    }}
+                    center={{ lat: latitude, lng: longitude }}
+                    defaultZoom={15}
+                    onChange={(e) => {
+                        setLatitude(e.center.lat);
+                        setLongitude(e.center.lng);
+                    }}
+                >
+                </GoogleMapReact>
+            </div>
+
+
 
 
         </div>

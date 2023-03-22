@@ -1,0 +1,15 @@
+.lugares{
+  display: flex;
+}
+
+
+.lista_lugares{
+   width: 25%;
+   height: 200vh;
+   overflow: auto;
+}
+
+.mapa_lugares{
+    width: 75%;
+    height: 200vh !important;
+}

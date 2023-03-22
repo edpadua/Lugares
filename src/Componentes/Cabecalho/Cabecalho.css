@@ -1,0 +1,11 @@
+header{
+    background-color: #700c0c;
+    color: #ffffff;
+    height: 80px;
+}
+
+.titulo{
+    display: grid;
+    text-align: center;
+    width: 100%;
+}
