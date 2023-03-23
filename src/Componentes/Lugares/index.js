@@ -6,7 +6,10 @@ import { useEffect, useState } from 'react';
 
 import Lugar from '../Lugar';
 
+import Mapa from '../Mapa';
+
 import GoogleMapReact from 'google-map-react';
+import ListaDeLugares from '../ListaDeLugares';
 
 function Lugares() {
 
@@ -20,13 +23,13 @@ function Lugares() {
             setLatitude(position.coords.latitude)
             setLongitude(position.coords.longitude)
         });
-       
+
     }, []);
 
 
     useEffect(() => {
         const getLugares = async (lat, lng) => {
-            console.log("key",process.env.REACT_APP_TRAVEL_KEY)
+            console.log("key", process.env.REACT_APP_TRAVEL_KEY)
             const options = {
                 method: 'GET',
                 url: 'https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng',
@@ -68,43 +71,16 @@ function Lugares() {
         <div className="lugares">
 
 
-
-            <div className="lista_lugares">
-
+            <ListaDeLugares lugares={lugares} />
 
 
-                {console.log("lugares definitivos", lugares)}
+            <Mapa
+                latitude={latitude}
+                longitude={longitude}
+                setLatitude={setLatitude}
+                setLongitude={setLongitude}
 
-
-                {lugares.map((lugar, index) =>
-
-
-                    <Lugar lugar={lugar} index={index} />
-
-
-                )}
-
-            </div>
-
-            <div className="mapa_lugares" >
-
-                <GoogleMapReact
-                    bootstrapURLKeys={{
-                        key: process.env.REACT_APP_GOOGLE_MAPS_KEY,
-                        language: "en",
-                        region: "US"
-                    }}
-                    center={{ lat: latitude, lng: longitude }}
-                    defaultZoom={15}
-                    onChange={(e) => {
-                        setLatitude(e.center.lat);
-                        setLongitude(e.center.lng);
-                    }}
-                >
-                </GoogleMapReact>
-            </div>
-
-
+            />
 
 
         </div>
