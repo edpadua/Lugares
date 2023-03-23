@@ -1,5 +1,5 @@
 .lugarCard{
-    width: 90%;
+    
     box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
     display: inline-block;
     margin: 20px;
@@ -13,6 +13,7 @@
 
 .lugarCard p{
     font-weight: 500;
+    line-height: 1.5em;
 }
 
 .lugar{
@@ -24,4 +25,26 @@
 .lugarTitulo{
     margin-left: 5%;
     margin-right: 5%;
+    
+}
+
+
+.lugarTituloBox{
+    
+    color: #700c0c;
+    width: 100%;
+    display: grid;
+    text-align: center;
+}
+
+.lugar a{
+    text-decoration: none;
+    color:#700c0c;
+    font-weight: 600;
+}
+
+.lugar a:hover{
+    text-decoration: none;
+    color:#310606;
+    font-weight: 600;
 }

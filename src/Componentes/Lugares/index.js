@@ -26,6 +26,7 @@ function Lugares() {
 
     useEffect(() => {
         const getLugares = async (lat, lng) => {
+            console.log("key",process.env.REACT_APP_TRAVEL_KEY)
             const options = {
                 method: 'GET',
                 url: 'https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng',
